@@ -1,0 +1,54 @@
+﻿<Window x:Class="Licencse.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Licencse"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Mac Address: "
+                       Width="200"></TextBlock>
+            <ComboBox x:Name="cbx_macaddress"
+                      SelectedIndex="0"
+                      SelectionChanged="cbx_macaddress_SelectionChanged"
+                      Width="200"></ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="Day: "
+               Width="200"></TextBlock>
+            <ComboBox x:Name="cbx_day"
+                      SelectionChanged="cbx_day_SelectionChanged"
+                        Width="200" SelectedIndex="0">
+            </ComboBox>
+            <TextBlock Width="30"
+                       Text="Day"></TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text="AppID: " x:Name="tbl_appid"
+                Width="200"></TextBlock>
+            <TextBox x:Name="tb_appid" Text="Licencse"
+                    Width="200"></TextBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Button Content="Gen License" Width="300"
+                x:Name="btn_genlicense"  
+                Click="btn_genlicense_Click"></Button>
+            <Button Content="Load License" x:Name="btn_loadlicense" 
+                    Width="300" Click="btn_loadlicense_Click"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Window>
