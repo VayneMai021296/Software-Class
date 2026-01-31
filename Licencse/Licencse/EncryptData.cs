@@ -8,54 +8,40 @@ namespace Licencse
 {
     class EncryptData
     {
-        public static string Encode(string? input, string signature = "myapp001NeverKnowLicense")
+        public static string Encode(string? input, string signature = "~yapp001NeverKnowLicense")
         {
             if (input == string.Empty) return "";
             int lenInput = input.Length;
             int lenSig = signature.Length;
             StringBuilder builder = new StringBuilder(lenInput);
-            for(int i =0 , j = 0; i < lenInput; i++, j++)
+            for (int i = 0; i < input.Length; i++)
             {
+                int inp = input[i];
+                int sig = signature[i % signature.Length];
+                int shift = sig % 95;
 
-                char inp = input[i];
-                if(j == lenSig)
-                    j = 0;           
-
-                char key = signature[j];
-                inp += key;
-
-                if(inp > 127)
-                {
-                    inp = (char)(inp - 127 +32);
-                }
-
-                builder.Append(inp);
+                int encode = 32 + ((inp - 32 + shift) % 95);
+                builder.Append((char)encode);
             }
 
             return builder.ToString();
         }
-        public static string Decode(string? input, string signature = "myapp001NeverKnowLicense")
+        public static string Decode(string? input, string signature = "~yapp001NeverKnowLicense")
         {
             int lenInput = input.Length;
 
             StringBuilder builder = new StringBuilder(lenInput);
             int lenSig = signature.Length;
 
-            for (int i = 0, j = 0; i < lenInput; i++, j++)
-            {
-                char inp = input[i];
-                if (j == lenSig)
-                    j = 0;
-                char key = signature[j];
-                inp -= key;
+            for(int i = 0; i < input.Length; i++)
+        {
+                int inp = input[i];
 
-                char decodeInput = inp;
+                int sig = signature[i % signature.Length];
+                int shift = sig % 95;
 
-                if (inp < 32 || inp >127)
-                {
-                    decodeInput = (char)(inp - 32 + 127);
-                }
-                builder.Append(decodeInput);
+                int decode = 32 + ((inp - 32 - shift + 95) % 95);
+                builder.Append((char)decode);
             }
             return builder.ToString();
         }

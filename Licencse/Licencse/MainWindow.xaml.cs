@@ -48,7 +48,7 @@ public partial class MainWindow : Window
                 continue;
 
             PhysicalAddress pa = nic.GetPhysicalAddress(); // [page:0]
-            string mac = FormatMac(pa);
+            string? mac = FormatMac(pa);
 
             if (!string.IsNullOrEmpty(mac) && !result.Contains(mac))
                 result.Add(mac);
@@ -56,7 +56,7 @@ public partial class MainWindow : Window
 
         return result;
     }
-    private static string FormatMac(PhysicalAddress pa)
+    private static string? FormatMac(PhysicalAddress pa)
     {
         if (pa == null) return null;
 
@@ -80,6 +80,8 @@ public partial class MainWindow : Window
         
     private void btn_genlicense_Click(object sender, RoutedEventArgs e)
     {
+        string inputData = EncryptData.Encode("~thisisapplication");
+        string decode = EncryptData.Decode(inputData);
         try
         {
             appID = tb_appid.Text;
